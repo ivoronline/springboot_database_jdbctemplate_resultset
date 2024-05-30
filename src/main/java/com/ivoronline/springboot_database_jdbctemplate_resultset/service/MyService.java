@@ -32,7 +32,7 @@ public class MyService {
     while(resultSet.next()) {           //NEXT RECORD
       personDTO.setId  (resultSet.getInt   ("ID"  ));
       personDTO.setName(resultSet.getString("NAME"));
-      personDTO.setAge (resultSet.getInt   ("AGE" ));
+      personDTO.setAge (guardAgainstNullNumbers("AGE", resultSet));
     }
 
     //RETURN DTO
@@ -57,13 +57,21 @@ public class MyService {
       PersonDTO personDTO = new PersonDTO();
                 personDTO.setId  (resultSet.getInt   ("ID"  ));
                 personDTO.setName(resultSet.getString("NAME"));
-                personDTO.setAge (resultSet.getInt   ("AGE" ));
+                personDTO.setAge (guardAgainstNullNumbers("AGE", resultSet));
       personDTOList.add(personDTO);
     }
 
     //RETURN DTO
     return personDTOList;
 
+  }
+
+  //=========================================================================================================
+  // GUARD AGAINST NULL NUMBERS
+  //=========================================================================================================
+  public Integer guardAgainstNullNumbers(String columnName, ResultSet resultSet) throws SQLException {
+    Integer value = resultSet.getInt(columnName); //It will be 0 for null
+    return resultSet.wasNull() ? null : value;
   }
 
 }
