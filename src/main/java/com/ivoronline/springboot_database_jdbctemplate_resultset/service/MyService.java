@@ -25,7 +25,7 @@ public class MyService {
     DataSource dataSource = jdbcTemplate.getDataSource();
     Connection connection = DataSourceUtils.getConnection(dataSource);
     Statement  statement  = connection.createStatement();
-    ResultSet  resultSet  = statement.executeQuery("SELECT * FROM PERSON WHERE ID = " + id);
+    ResultSet  resultSet  = statement.executeQuery("SELECT * FROM PERSON WHERE ID = " + id); //Parameters
 
     //STORE RECORD IN DTO
     PersonDTO personDTO = new PersonDTO();
@@ -49,7 +49,7 @@ public class MyService {
     DataSource dataSource = jdbcTemplate.getDataSource();
     Connection connection = DataSourceUtils.getConnection(dataSource);
     Statement  statement  = connection.createStatement();
-    ResultSet  resultSet  = statement.executeQuery("SELECT * FROM PERSON PERSON WHERE ID >= 1");
+    ResultSet  resultSet  = statement.executeQuery("SELECT * FROM PERSON PERSON WHERE ID >= 1"); //No Parameters
 
     //STORE RECORD IN DTO
     List<PersonDTO> personDTOList = new ArrayList<>();
